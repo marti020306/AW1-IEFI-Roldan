@@ -1,0 +1,877 @@
+/* ============================================================
+   1. VARIABLES
+   ============================================================ */
+
+:root {
+    --verde-oscuro: #2f4a3e;
+    --verde: #52705f;
+    --verde-claro: #dfe9e2;
+
+    --mostaza: #d5b66a;
+    --mostaza-claro: #f0e3b7;
+    --mostaza-oscuro: #b99548;
+
+    --crema: #faf7ef;
+    --blanco: #ffffff;
+
+    --texto: #29352f;
+    --texto-suave: #607068;
+
+    --borde: #d8d2c4;
+    --error: #a94a42;
+
+    --sombra: 0 4px 14px rgb(47 74 62 / 0.10);
+    --sombra-hover: 0 8px 22px rgb(47 74 62 / 0.16);
+
+    --radio: 14px;
+    --radio-chico: 10px;
+}
+
+
+/* ============================================================
+   2. RESET Y ELEMENTOS BASE (selectores de tipo)
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Inter', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--crema);
+    color: var(--texto);
+
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    color: var(--verde-oscuro);
+    line-height: 1.2;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.55rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1rem; }
+
+p {
+    margin-bottom: 8px;
+}
+
+img,
+iframe {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+
+/* ============================================================
+   3. COMPONENTES GENÉRICOS (reutilizables en todo el sitio)
+   ============================================================ */
+
+/* --- Botones --- */
+
+.btn {
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    border: 2px solid transparent;
+    border-radius: var(--radio-chico);
+
+    cursor: pointer;
+
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn--primario {
+    background-color: var(--mostaza);
+    color: var(--verde-oscuro);
+}
+
+.btn--primario:hover {
+    background-color: var(--mostaza-oscuro);
+    color: var(--blanco);
+}
+
+.btn--secundario {
+    border-color: var(--verde);
+
+    background-color: transparent;
+    color: var(--verde-oscuro);
+}
+
+.btn--secundario:hover {
+    background-color: var(--verde-claro);
+}
+
+.btn--texto {
+    padding: 4px 6px;
+
+    border: 0;
+
+    background-color: transparent;
+    color: var(--error);
+
+    text-decoration: underline;
+}
+
+/* --- Campos de formulario (buscador y contacto) --- */
+
+.formulario__control,
+.buscador__input,
+.buscador__select {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+
+    background-color: var(--blanco);
+    color: var(--texto);
+}
+
+.formulario__control:focus,
+.buscador__input:focus,
+.buscador__select:focus {
+    outline: 3px solid var(--mostaza-claro);
+    border-color: var(--mostaza-oscuro);
+}
+
+/* --- Caja (panel blanco/amarillo con borde y sombra) --- */
+
+.buscador,
+.formulario,
+.contacto-info,
+.resumen,
+.propuesta,
+.item-carrito {
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+
+    box-shadow: var(--sombra);
+}
+
+/* --- Grilla --- */
+
+.grilla {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+/* --- Secciones y encabezados --- */
+
+.seccion {
+    margin: 36px 0;
+}
+
+.seccion__titulo {
+    margin-bottom: 18px;
+}
+
+.encabezado-pagina {
+    margin-bottom: 28px;
+}
+
+.encabezado-pagina__titulo {
+    margin-bottom: 8px;
+}
+
+.encabezado-pagina__texto {
+    color: var(--texto-suave);
+}
+
+/* --- Tarjetas de producto --- */
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+
+    background-color: var(--blanco);
+
+    box-shadow: var(--sombra);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-hover);
+}
+
+.tarjeta__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.tarjeta__titulo,
+.tarjeta__desc,
+.tarjeta__detalle,
+.tarjeta__precio,
+.tarjeta .btn {
+    margin-left: 18px;
+    margin-right: 18px;
+}
+
+.tarjeta__titulo {
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.tarjeta__desc,
+.tarjeta__detalle {
+    color: var(--texto-suave);
+}
+
+.tarjeta__precio {
+    margin-top: 8px;
+
+    color: var(--verde-oscuro);
+
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* El botón dentro de la tarjeta queda abajo y alineado a la izquierda */
+.tarjeta .btn {
+    margin-top: 16px;
+    margin-bottom: 18px;
+
+    align-self: flex-start;
+}
+
+
+/* ============================================================
+   4. ESTRUCTURA (header, contenido, footer)
+   ============================================================ */
+
+/* --- Header --- */
+
+.cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+
+    padding: 10px 16px;
+
+    background-color: var(--verde-oscuro);
+    color: var(--crema);
+
+    box-shadow: 0 3px 12px rgb(0 0 0 / 0.12);
+}
+
+.cabecera__logo {
+    display: block;
+    text-decoration: none;
+}
+
+.cabecera__img {
+    width: 58px;
+    height: 58px;
+
+    object-fit: cover;
+
+    border: 2px solid var(--mostaza);
+    border-radius: 50%;
+}
+
+.cabecera__titulo {
+    margin: 0 auto 0 0;
+
+    color: var(--mostaza-claro);
+
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+/* --- Navegación --- */
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    width: 100%;
+}
+
+.nav__link {
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    color: var(--crema);
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.nav__link:hover {
+    background-color: var(--mostaza-claro);
+    color: var(--verde-oscuro);
+}
+
+.nav__link--activo {
+    background-color: var(--mostaza);
+    color: var(--verde-oscuro);
+
+    font-weight: 600;
+}
+
+/* --- Contenido principal --- */
+
+.contenido {
+    flex: 1;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+    padding: 28px 16px;
+}
+
+/* --- Footer --- */
+
+.pie {
+    padding: 26px 16px;
+
+    background-color: var(--verde-oscuro);
+    color: var(--crema);
+
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.pie__lista {
+    display: grid;
+    gap: 4px;
+
+    margin-top: 8px;
+}
+
+.pie__link {
+    color: var(--mostaza-claro);
+}
+
+
+/* ============================================================
+   5. PÁGINAS (selectores combinados con la clase del body)
+   ============================================================ */
+
+/* --- INICIO --- */
+
+.pagina-inicio .hero {
+    position: relative;
+
+    overflow: hidden;
+
+    margin-bottom: 38px;
+
+    border-radius: 18px;
+
+    box-shadow: var(--sombra);
+}
+
+.hero__img {
+    width: 100%;
+    height: 310px;
+
+    object-fit: cover;
+}
+
+.hero__texto {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 26px;
+
+    background: linear-gradient(
+        90deg,
+        rgb(47 74 62 / 0.90),
+        rgb(47 74 62 / 0.35)
+    );
+
+    color: var(--blanco);
+}
+
+.hero__titulo {
+    max-width: 600px;
+    margin-bottom: 10px;
+
+    color: var(--mostaza-claro);
+}
+
+.hero__bajada {
+    max-width: 34ch;
+    font-size: 1.05rem;
+}
+
+.pagina-inicio .propuesta {
+    padding: 26px;
+    background-color: var(--mostaza-claro);
+}
+
+.propuesta__titulo {
+    margin-bottom: 10px;
+}
+
+.propuesta__texto {
+    max-width: 75ch;
+}
+
+/* --- CATÁLOGO --- */
+
+.pagina-catalogo .buscador {
+    margin-bottom: 34px;
+    padding: 20px;
+
+    background-color: var(--blanco);
+}
+
+.buscador__form {
+    display: grid;
+    gap: 20px;
+}
+
+.buscador__fila {
+    display: grid;
+    gap: 10px;
+}
+
+.filtros__titulo {
+    margin-top: 4px;
+}
+
+.buscador .filtro {
+    padding: 14px;
+
+    border-radius: var(--radio-chico);
+
+    background-color: var(--crema);
+}
+
+.filtro__titulo {
+    margin-bottom: 8px;
+    color: var(--verde-oscuro);
+}
+
+.filtro__opcion {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin: 6px 0;
+}
+
+.filtro__check,
+.filtro__rango {
+    accent-color: var(--verde);
+}
+
+.filtro__rango {
+    width: 100%;
+    max-width: 320px;
+}
+
+.pagina-catalogo .categoria {
+    margin-top: 40px;
+}
+
+.categoria .seccion__titulo {
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--mostaza);
+}
+
+/* --- CARRITO --- */
+
+.carrito-productos {
+    display: grid;
+    gap: 18px;
+
+    min-width: 0;
+}
+
+.carrito-productos .item-carrito {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 5px 16px;
+
+    padding: 16px;
+
+    background-color: var(--blanco);
+}
+
+.item-carrito__img {
+    grid-row: span 6;
+
+    width: 90px;
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: var(--radio-chico);
+}
+
+.item-carrito__titulo {
+    color: var(--verde-oscuro);
+}
+
+.item-carrito__detalle {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+.item-carrito__subtotal {
+    color: var(--verde-oscuro);
+    font-weight: 700;
+}
+
+.item-carrito .btn--texto {
+    justify-self: start;
+}
+
+.cantidad {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cantidad__btn {
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid var(--verde);
+    border-radius: 50%;
+
+    background-color: var(--crema);
+    color: var(--verde-oscuro);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.cantidad__btn:hover {
+    background-color: var(--mostaza-claro);
+}
+
+.cantidad__valor {
+    min-width: 25px;
+
+    font-weight: 600;
+    text-align: center;
+}
+
+.enlace-volver {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color: var(--verde-oscuro);
+
+    font-weight: 600;
+}
+
+.pagina-carrito .resumen {
+    margin-top: 28px;
+    padding: 24px;
+
+    background-color: var(--mostaza-claro);
+}
+
+.resumen__titulo {
+    margin-bottom: 14px;
+}
+
+.resumen__linea {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-bottom: 8px;
+}
+
+.resumen__linea--total {
+    margin-top: 12px;
+    padding-top: 12px;
+
+    border-top: 1px solid var(--mostaza-oscuro);
+
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.resumen .btn {
+    width: 100%;
+    margin: 16px 0;
+}
+
+.resumen__nota {
+    margin-bottom: 0;
+
+    color: var(--texto-suave);
+
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* --- CONTACTO --- */
+
+.contacto-form__titulo,
+.contacto-info__titulo {
+    margin-bottom: 12px;
+}
+
+.contacto-form__texto {
+    margin-bottom: 20px;
+    color: var(--texto-suave);
+}
+
+.pagina-contacto .formulario {
+    display: grid;
+    gap: 16px;
+
+    padding: 24px;
+
+    background-color: var(--blanco);
+}
+
+.formulario__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    margin-bottom: 0;
+}
+
+.formulario__label {
+    color: var(--verde-oscuro);
+    font-weight: 600;
+}
+
+/* El textarea solo crece en alto */
+.formulario textarea.formulario__control {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.formulario__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.formulario__acciones .btn {
+    flex: 1 1 140px;
+}
+
+.pagina-contacto .contacto-info {
+    margin-top: 32px;
+    padding: 24px;
+
+    background-color: var(--mostaza-claro);
+}
+
+.contacto-info__lista {
+    display: grid;
+    gap: 6px;
+
+    margin-bottom: 24px;
+}
+
+.contacto-info .mapa {
+    width: 100%;
+    height: 280px;
+
+    margin-top: 12px;
+
+    border: 0;
+    border-radius: var(--radio-chico);
+}
+
+
+/* ============================================================
+   6. MEDIA QUERIES (mobile first)
+   ============================================================ */
+
+/* --- Tablet: 600px o más --- */
+
+@media (min-width: 600px) {
+
+    .grilla {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buscador__fila {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .pie__lista {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .formulario__acciones .btn {
+        flex: 0 0 auto;
+    }
+}
+
+/* --- Escritorio: 900px o más --- */
+
+@media (min-width: 900px) {
+
+    h1 { font-size: 2.75rem; }
+    h2 { font-size: 1.9rem; }
+
+    .cabecera {
+        padding: 10px 32px;
+    }
+
+    .cabecera__titulo {
+        font-size: 1.7rem;
+    }
+
+    .nav {
+        width: auto;
+    }
+
+    .contenido {
+        padding: 40px 24px;
+    }
+
+    .grilla {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Inicio */
+
+    .hero__img {
+        height: 430px;
+    }
+
+    .hero__texto {
+        padding: 48px;
+    }
+
+    .hero__bajada {
+        font-size: 1.2rem;
+    }
+
+    /* Catálogo */
+
+    .buscador__form {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .buscador__fila,
+    .filtros__titulo {
+        grid-column: 1 / -1;
+    }
+
+    /* Carrito: productos a la izquierda, resumen a la derecha */
+
+    .pagina-carrito .contenido {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 0 32px;
+        align-items: start;
+    }
+
+    .pagina-carrito .encabezado-pagina {
+        grid-column: 1 / -1;
+    }
+
+    .pagina-carrito .resumen {
+        position: sticky;
+        top: 100px;
+
+        margin-top: 0;
+    }
+
+    /* Contacto: formulario a la izquierda, info a la derecha */
+
+    .pagina-contacto .contenido {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+
+    .pagina-contacto .encabezado-pagina {
+        grid-column: 1 / -1;
+        margin-bottom: 0;
+    }
+
+    .pagina-contacto .contacto-info {
+        margin-top: 0;
+    }
+}

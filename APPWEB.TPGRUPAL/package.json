@@ -12,13 +12,13 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.21.0",
+      "version": "12.4.2",
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.21.0",
+  "packageManager": "pnpm@12.4.2",
   "type": "module",
   "dependencies": {
-    "five-server": "^0.6.0"
+    "five-server": "^0.5.0"
   }
 }
