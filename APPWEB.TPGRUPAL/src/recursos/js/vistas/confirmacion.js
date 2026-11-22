@@ -23,6 +23,7 @@ export function iniciarConfirmacion() {
  
     contenedor.replaceChildren(
         crearElemento("h2", "confirmacion__titulo", `¡Gracias, ${pedido.cliente.nombre}!`),
+        Object.assign(crearElemento("p", "aviso aviso--ok", "✔ Pedido enviado por WhatsApp a Molido Café."), { role: "status" }),
         crearElemento("p", "", `Tu pedido ${pedido.numero} fue registrado. Te enviaremos novedades a ${pedido.cliente.email}.`),
         lista,
         crearElemento("p", "confirmacion__total", `Total: ${formatearPrecio(pedido.total)}`)

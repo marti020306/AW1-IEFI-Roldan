@@ -23,3 +23,28 @@ export function crearElemento(etiqueta, clase, texto) {
 export function normalizar(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
+
+// Acepta teléfonos argentinos con o sin prefijos (+54, 9, 0, 15), espacios o guiones.
+export function validarTelefono(texto) {
+    const digitos = String(texto).replace(/[\s\-()+]/g, "");
+    return /^\d{8,13}$/.test(digitos);
+}
+
+export const WHATSAPP_NEGOCIO = "5493512173508"; 
+
+export function armarMensajeWhatsApp(pedido) {
+    const lineas = pedido.items.map((i) => `• ${i.cantidad} × ${i.nombre} — ${formatearPrecio(i.subtotal)}`);
+    return [
+        `Hola Molido Café! Quiero confirmar el pedido ${pedido.numero}:`,
+        ...lineas,
+        `Envío: ${formatearPrecio(pedido.envio)}`,
+        `Total: ${formatearPrecio(pedido.total)}`,
+        `Nombre: ${pedido.cliente.nombre}`,
+        `Dirección: ${pedido.cliente.direccion}`,
+        `Pago: ${pedido.cliente.pago}`,
+    ].join("\n");
+}
+
+export function urlWhatsApp(pedido) {
+    return `https://wa.me/${WHATSAPP_NEGOCIO}?text=${encodeURIComponent(armarMensajeWhatsApp(pedido))}`;
+}

@@ -1091,3 +1091,8 @@ textarea.formulario__control {
         margin-top: 0;
     }
 }
+
+/* Avisos / notificaciones en la interfaz */
+.aviso { padding: 0.75rem 1rem; border-radius: 8px; margin: 1rem auto; max-width: 60rem; }
+.aviso--ok { background: #e3f1e6; color: #2f4a3e; }
+.aviso--error { background: #fbe4e1; color: #7a2418; }

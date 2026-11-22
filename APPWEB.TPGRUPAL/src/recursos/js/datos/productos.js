@@ -1,96 +1,20 @@
-// Estructura de datos del catálogo (módulo independiente).
-// Cada producto tiene un id único, usado por el carrito.
- 
-export const secciones = [
-    { id: "cafes", titulo: "Cafés" },
-    { id: "capsulas", titulo: "Cápsulas" },
-    { id: "pasteleria", titulo: "Pastelería" },
-    { id: "combos", titulo: "Combos" },
-];
- 
-export const productos = [
-    {
-        id: "cafe-origen",
-        nombre: "Café Origen",
-        detalle: "Grano 250 g",
-        descripcion: "Notas frutales y chocolate.",
-        precio: 9500,
-        categoria: "granos",
-        origen: "colombia",
-        seccion: "cafes",
-        imagen: "./recursos/imagenes/productos/cafe_origen.jpg",
-        alt: "Café de origen",
-    },
-    {
-        id: "espresso-blend",
-        nombre: "Espresso Blend",
-        detalle: "Grano 500 g",
-        descripcion: "Intenso y de cuerpo equilibrado.",
-        precio: 8500,
-        categoria: "granos",
-        origen: "brasil",
-        seccion: "cafes",
-        imagen: "./recursos/imagenes/productos/pexels-agencia-bonito-1849970458-28495600 (3).jpg",
-        alt: "Café especial",
-    },
-    {
-        id: "cafe-descafeinado",
-        nombre: "Café Descafeinado",
-        detalle: "Molido 250 g",
-        descripcion: "Suave y delicioso, sin cafeína.",
-        precio: 8900,
-        categoria: "molido",
-        origen: "otros",
-        seccion: "cafes",
-        imagen: "./recursos/imagenes/productos/cafe-descafeinado-chica.jpg",
-        alt: "Café descafeinado",
-    },
-    {
-        id: "capsulas-molido",
-        nombre: "Cápsulas Molido",
-        detalle: "Pack de 10 cápsulas",
-        descripcion: "Practicidad con el sabor de siempre.",
-        precio: 7500,
-        categoria: "capsulas",
-        origen: "otros",
-        seccion: "capsulas",
-        imagen: "./recursos/imagenes/productos/pexels-diego-lopez-3192702-27898475 (1).jpg",
-        alt: "Cápsulas de café",
-    },
-    {
-        id: "croissant",
-        nombre: "Croissant",
-        detalle: "Croissant artesanal de manteca",
-        descripcion: "Horneado todos los días.",
-        precio: 4500,
-        categoria: "pasteleria",
-        origen: "otros",
-        seccion: "pasteleria",
-        imagen: "./recursos/imagenes/productos/factura.jpg",
-        alt: "Croissant artesanal",
-    },
-    {
-        id: "torta-chocolate",
-        nombre: "Torta de chocolate",
-        detalle: "Porción individual",
-        descripcion: "Húmeda, intensa y artesanal.",
-        precio: 6000,
-        categoria: "pasteleria",
-        origen: "otros",
-        seccion: "pasteleria",
-        imagen: "./recursos/imagenes/productos/torta-de-chocolate.jpg",
-        alt: "Porción de torta de chocolate",
-    },
-    {
-        id: "combo-merienda",
-        nombre: "Combo Merienda",
-        detalle: "Café + croissant",
-        descripcion: "La merienda perfecta para compartir.",
-        precio: 12000,
-        categoria: "combos",
-        origen: "otros",
-        seccion: "combos",
-        imagen: "./recursos/imagenes/productos/CafeConFactura.jpg",
-        alt: "Combo de café y pastelería",
-    },
-];
+// Carga del catálogo desde un archivo JSON mediante fetch.
+// `productos` y `secciones` son arrays compartidos: se llenan al llamar a cargarCatalogo().
+export const secciones = [];
+export const productos = [];
+
+const URL_CATALOGO = new URL("../../datos/catalogo.json", import.meta.url);
+
+export async function cargarCatalogo() {
+    try {
+        const respuesta = await fetch(URL_CATALOGO);
+        if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+        const datos = await respuesta.json();
+        secciones.splice(0, secciones.length, ...datos.secciones);
+        productos.splice(0, productos.length, ...datos.productos);
+        return true;
+    } catch (error) {
+        console.error("No se pudo cargar el catálogo:", error);
+        return false;
+    }
+}
