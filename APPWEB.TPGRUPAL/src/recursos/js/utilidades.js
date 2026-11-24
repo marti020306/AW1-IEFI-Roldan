@@ -30,7 +30,7 @@ export function validarTelefono(texto) {
     return /^\d{8,13}$/.test(digitos);
 }
 
-export const WHATSAPP_NEGOCIO = "5493510000000"; // REEMPLAZAR por el número real del negocio
+export const WHATSAPP_NEGOCIO = "5493512173508"; 
 
 export function armarMensajeWhatsApp(pedido) {
     const lineas = pedido.items.map((i) => `• ${i.cantidad} × ${i.nombre} — ${formatearPrecio(i.subtotal)}`);
